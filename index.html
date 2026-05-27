@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СТЕРЖ | Стратегия запуска консалтингового бутика</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #0a0e1a;
+            --secondary: #111827;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-dark: #1d4ed8;
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --success: #10b981;
+            --danger: #ef4444;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            flex-shrink: 0;
+        }
+        
+        .nav-wrapper {
+            position: relative;
+            flex: 1;
+            max-width: 80%;
+            margin-left: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-light);
+            background: var(--glass);
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .nav-arrow:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .nav-arrow.left {
+            left: -5px;
+        }
+        
+        .nav-arrow.right {
+            right: -5px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-hero);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 1000px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        .author-info {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .author-info p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .author-info strong {
+            color: var(--text);
+        }
+        
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+        
+        .card p, .card li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        
+        /* Market Section */
+        .market-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-box {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            min-width: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+        
+        .metric-box.gold::before {
+            background: var(--gradient-gold);
+        }
+        
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        
+        .metric-sub {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+        
+        /* Insight Quote */
+        .insight-quote {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 2rem 2.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .insight-quote p {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .insight-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        th {
+            background: var(--glass);
+            font-weight: 700;
+            color: var(--accent-light);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        td {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background: var(--glass);
+        }
+        
+        /* Strategy Cards */
+        .strategy-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .strategy-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .strategy-card.active {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .strategy-card .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+        }
+        
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .badge-warning {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .badge-neutral {
+            background: var(--text-dim);
+            color: white;
+        }
+        
+        /* Product Pyramid */
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .pyramid-level {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .pyramid-level:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+        
+        .level-tag {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        
+        .tag-heavy { background: var(--danger); color: white; }
+        .tag-core { background: var(--accent); color: white; }
+        .tag-entry { background: var(--success); color: white; }
+        
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .product-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+        
+        /* Roadmap */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--glass-border);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+            padding-right: 52%;
+        }
+        
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+            padding-left: 52%;
+        }
+        
+        .timeline-content {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 100%;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 3px solid var(--primary);
+        }
+        
+        .timeline-year {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Vision Section */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .vision-card {
+            background: linear-gradient(135deg, var(--glass) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        
+        .vision-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .vision-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .vision-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .vision-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        
+        .vision-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+        
+        .value-letter {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .value-letter:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .value-char {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-word {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        
+        .value-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .print-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .values-grid { grid-template-columns: repeat(3, 1fr); }
+            .vision-grid { grid-template-columns: 1fr; }
+            .strategy-cards { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .strategy-cards { grid-template-columns: 1fr; }
+            .timeline::before { left: 20px; }
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 50px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+            .timeline-dot { left: 20px; }
+            .hero-stats { gap: 1.5rem; }
+            .stat-value { font-size: 2rem; }
+            .nav-wrapper { display: none; }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Utility */
+        .text-accent { color: var(--accent-light); }
+        .text-gold { color: var(--gold); }
+        .text-success { color: var(--success); }
+        .text-danger { color: var(--danger); }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .w-full { width: 100%; }
+        
+        /* Canvas Chart Styles */
+        .canvas-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            position: relative;
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 1rem;
+        }
+
+        /* Client Portrait Cards */
+        .client-portrait {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s;
+        }
+        
+        .client-portrait:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .portrait-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .portrait-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .portrait-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .portrait-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .pain-points, .gains {
+            margin-bottom: 1.5rem;
+        }
+        
+        .pain-points h4 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .gains h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .pain-points li, .gains li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            list-style: none;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .pain-points li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+        }
+        
+        .gains li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+        }
+        
+        .insight-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+        
+        .insight-box p {
+            font-style: italic;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">СТЕРЖ</div>
+            <div class="nav-wrapper">
+                <button class="nav-arrow left" onclick="scrollNav(-1)" aria-label="Scroll left">◀</button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#goals">Цель</a></li>
+                    <li><a href="#context">Контекст</a></li>
+                    <li><a href="#market">Рынок</a></li>
+                    <li><a href="#competitors">Конкуренты</a></li>
+                    <li><a href="#research">Исследование</a></li>
+                    <li><a href="#segmentation">Сегментация</a></li>
+                    <li><a href="#strategy">Стратегия</a></li>
+                    <li><a href="#ansoff">Ансофф</a></li>
+                    <li><a href="#canvas">Модель</a></li>
+                    <li><a href="#7s">7S</a></li>
+                    <li><a href="#swot">SWOT</a></li>
+                    <li><a href="#pyramid">Продукты</a></li>
+                    <li><a href="#funnel">Воронка</a></li>
+                    <li><a href="#leads">Лиды</a></li>
+                    <li><a href="#vision">Видение</a></li>
+                    <li><a href="#values">Ценности</a></li>
+                    <li><a href="#roadmap">Дорожная карта</a></li>
+                    <li><a href="#cooas">COOaaS</a></li>
+                    <li><a href="#ai">ИИ-обвязка</a></li>
+                    <li><a href="#financials">Финансы</a></li>
+                    <li><a href="#risks">Риски</a></li>
+                    <li><a href="#final">Выводы</a></li>
+                </ul>
+                <button class="nav-arrow right" onclick="scrollNav(1)" aria-label="Scroll right">▶</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="top">
+        <div class="hero-content">
+            <div class="badge">МВА «Трансформация»</div>
+            <h1>От хаоса к архитектуре процессов</h1>
+            <p class="hero-subtitle">Стратегия запуска консалтингового бутика по повышению операционной эффективности и автоматизации процессов МСП</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">млн ₽ цель за 1 год</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">40%</div>
+                    <div class="stat-label">EBITDA Margin к 3 году</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">37%</div>
+                    <div class="stat-label">Чистая рентабельность</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">проекта в 1 год</div>
+                </div>
+            </div>
+            
+            <div class="author-info">
+                <p><strong>Автор:</strong> Васильев Владислав Дмитриевич</p>
+                <p><strong>Руководитель:</strong> Шуваев Ярослав Александрович | <strong>Директор программы:</strong> Пуртов Андрей Станиславович</p>
+                <p>Президентская академия • 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section id="goals">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Цель и Задачи</span>
+                <h2 class="section-title">Стратегический фокус</h2>
+                <p class="section-desc">Разработка стратегии перехода к гибридной модели COOaaS в условиях региональной специфики СФО</p>
+            </div>
+            
+            <div class="insight-quote fade-in">
+                <p>Как выстроить переход от линейной проектной выручки к гибридной подписочной модели, исключив зависимость от личного ресурса основателя при сохранении качества?</p>
+            </div>
+            
+            <div class="grid grid-3 fade-in">
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Анализ макросреды</h3>
+                    <p>Комплексный анализ PESTEL и отраслевого контекста СФО</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Качественное исследование</h3>
+                    <p>Выявление скрытых барьеров и верификация инсайтов через глубинные интервью</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Продуктовая архитектура</h3>
+                    <p>Проектирование с переходом к рекуррентной модели COOaaS</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>Финансовое моделирование</h3>
+                    <p>Сценарный анализ P&L на 3 года с юнит-экономикой</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🗺️</div>
+                    <h3>Дорожная карта</h3>
+                    <p>Поэтапный план масштабирования до BHAG 100 млн ₽ к 2036 году</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h3>ИИ-интеграция</h3>
+                    <p>Внутренняя обвязка для снижения операционной нагрузки до ≤12 ч/нед</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Context Section -->
+    <section id="context" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Макросреда</span>
+                <h2 class="section-title">Окно возможностей</h2>
+                <p class="section-desc">Сочетание внешнего давления, цифрового разрыва и зрелости технологий создает уникальный момент для экспертного консалтинга</p>
+            </div>
+            
+            <div class="grid grid-3 fade-in">
+                <div class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Политика & Экономика</h3>
+                    <p>Санкционная изоляция и курс на импортозамещение ПО. Повышение НДС до 22%, прогрессивная шкала налогов. Рост IT-рынка на 10% в 2026 году при замедлении ВВП.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Социум & Технологии</h3>
+                    <p>Рекордно низкая безработица (2,1%) + дефицит кадров. 90% пилотов генеративного ИИ в РФ закрыты из-за отсутствия ROI. Разрыв между хайпом и реальной ценностью.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📜</div>
+                    <h3>Регуляторика</h3>
+                    <p>Ужесточение трудового и налогового законодательства. Электронизация госуправления. Декларируемая цель: 80% отечественного ПО к 2030 году.</p>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>Оптимизация трансформируется из инструмента стратегического роста в механизм операционного выживания для МСП.</p>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="text-center mb-3">Цифровой разрыв» СФО: инфраструктура есть, ИИ-зрелость — на уровне 2%</h3>
+                <div class="grid grid-2">
+                    <div>
+                        <h4 class="text-accent mb-2">Отраслевая специфика</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="mb-2">✅ Явные регионы-доноры: Красноярский край, Иркутская область</li>
+                            <li class="mb-2">✅ Кластеры: лесопереработка, алюминий, цветные/драг. металлы, нефть/газ, АПК</li>
+                            <li class="mb-2">✅ Инфраструктура: модернизация БАМа, логистические коридоры в АТР</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-danger mb-2">Барьеры зрелости</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="mb-2">⚠️ Низкое проникновение технологий (ИИ, облака)</li>
+                            <li class="mb-2">⚠️ Унаследованная неэффективность в процессах</li>
+                            <li class="mb-2">⚠️ Культурная готовность к изменениям ниже, чем в ЦФО</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Section -->
+    <section id="market">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">TAM / SAM / SOM</span>
+                <h2 class="section-title">Рыночный потенциал</h2>
+                <p class="section-desc">Реалистичная доля захвата 0,1% = 12 млн ₽/год при фокусе на компании с выручкой 2-15 млрд руб.</p>
+            </div>
+            
+            <div class="market-metrics fade-in">
+                <div class="metric-box">
+                    <div class="metric-value">8.8</div>
+                    <div class="metric-label">TAM (Общероссийский рынок)</div>
+                    <div class="metric-sub">млрд ₽ | 221 000 юр. лиц</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">1.76</div>
+                    <div class="metric-label">SAM (Сервисно доступный СФО)</div>
+                    <div class="metric-sub">млрд ₽ | ~1/10 от федерального</div>
+                </div>
+                <div class="metric-box gold">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">SOM (Целевой захват Год 1)</div>
+                    <div class="metric-sub">млн ₽ | 0,1% рынка | 24 проекта/год</div>
+                </div>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3">Параметры юнита</h3>
+                <div class="grid grid-3">
+                    <div class="text-center">
+                        <div class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">80-240 часов</div>
+                        <p class="text-muted mt-1">Трудозатраты на проект</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">5-15 тыс. ₽/час</div>
+                        <p class="text-muted mt-1">Ставка специалиста</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">500 000 ₽</div>
+                        <p class="text-muted mt-1">Средний чек проекта</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitors Section -->
+    <section id="competitors" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Конкурентное окружение</span>
+                <h2 class="section-title">Дифференциация через глубину</h2>
+                <p class="section-desc">Рынок насыщен «универсалами». Бутик дифференцируется через отраслевую экспертизу и гибридную модель COOaaS</p>
+            </div>
+            
+            <div class="grid grid-4 fade-in">
+                <div class="card text-center">
+                    <div class="card-icon">👤</div>
+                    <h3>Консультанты-одиночки</h3>
+                    <p>Низкая стоимость, но ограниченная экспертиза</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">🏢</div>
+                    <h3>Многопрофильные компании</h3>
+                    <p>Широкий спектр, но низкая специализация</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">🔧</div>
+                    <h3>Системные интеграторы</h3>
+                    <p>Техническая реализация без процессного подхода</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">💻</div>
+                    <h3>Разработчики ПО</h3>
+                    <p>Коробочные решения без кастомизации под процессы</p>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>Ключевое отличие: Конкуренты продают "часы" или "коробки". Мы продаем "результат" и "спокойствие" через внешнее управление эффективностью.</p>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3 text-center">Стратегическая канва (КФУ)</h3>
+                <p class="text-center text-muted mb-3">Сравнение профилей конкурентов и бутика 1.0</p>
+                <div class="canvas-container">
+                    <canvas id="strategyCanvas"></canvas>
+                </div>
+                <div class="text-center mt-3 text-muted" style="font-size: 0.85rem;">
+                    Оценки (1 — низкая, 3 — высокая)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Качественное исследование</span>
+                <h2 class="section-title">От гипотез к инсайтам</h2>
+                <p class="section-desc">На основе глубинных интервью с собственниками и CEO компаний СФО</p>
+            </div>
+            
+            <div class="card fade-in mb-4">
+                <h3 class="mb-3">Дизайн исследования</h3>
+                <div class="grid grid-3">
+                    <div>
+                        <p class="text-accent font-mono">4 глубинных интервью</p>
+                        <p class="text-muted">МСП 50–250 чел., 50–500 млн ₽/год</p>
+                    </div>
+                    <div>
+                        <p class="text-accent font-mono">Регион: Омск/область</p>
+                        <p class="text-muted">Через личные сети и холодный поиск</p>
+                    </div>
+                    <div>
+                        <p class="text-accent font-mono">Скрипт: 6 блоков</p>
+                        <p class="text-muted">Контекст → Боли → Инструменты → Опыт → Ожидания → Демография</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Client Portraits -->
+            <div class="grid grid-2 fade-in mt-4">
+                <div class="client-portrait">
+                    <div class="portrait-header">
+                        <div class="portrait-icon">👤</div>
+                        <div>
+                            <div class="portrait-title">«Зреющий Собственник»</div>
+                            <div class="portrait-subtitle">Малый бизнес, услуги</div>
+                        </div>
+                    </div>
+                    <div class="pain-points">
+                        <h4>Боли и вызовы</h4>
+                        <ul>
+                            <li>Постоянное «тушение пожаров»</li>
+                            <li>Дефицит времени и кадровый голод</li>
+                            <li>Финансовая неопределённость</li>
+                            <li>Страх потери контроля при делегировании</li>
+                        </ul>
+                    </div>
+                    <div class="gains">
+                        <h4>Потребности и запросы</h4>
+                        <ul>
+                            <li>Порядок и предсказуемость</li>
+                            <li>Сохранение партнёрских отношений</li>
+                            <li>Быстрый результат «здесь и сейчас»</li>
+                            <li>Доверие через «сарафанное радио»</li>
+                        </ul>
+                    </div>
+                    <div class="insight-box">
+                        <p>«Я построил это руками, но теперь они не справляются. Боюсь потерять контроль.»</p>
+                    </div>
+                </div>
+                
+                <div class="client-portrait" style="border-color: var(--accent);">
+                    <div class="portrait-header">
+                        <div class="portrait-icon">🏭</div>
+                        <div>
+                            <div class="portrait-title">«Гарант» (Целевой)</div>
+                            <div class="portrait-subtitle">Средний бизнес, производство / нефтегаз </div>
+                        </div>
+                    </div>
+                    <div class="pain-points">
+                        <h4>Боли и вызовы</h4>
+                        <ul>
+                            <li>Хаос на стыках отделов, множество «источников правды»</li>
+                            <li>Репутационные риски, регулярные авралы</li>
+                            <li>Дефицит квалифицированных кадров</li>
+                            <li>Ручная консолидация отчётности</li>
+                        </ul>
+                    </div>
+                    <div class="gains">
+                        <h4>Потребности и запросы</h4>
+                        <ul>
+                            <li>Прозрачность процессов и предсказуемость</li>
+                            <li>Высвобождение времени для стратегии</li>
+                            <li>Надёжность перед крупными заказчиками</li>
+                            <li>Готовность к масштабированию и ERP</li>
+                        </ul>
+                    </div>
+                    <div class="insight-box">
+                        <p>«Цена несогласованности — это постоянный стресс и работа над ошибками, которых можно было избежать.»</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 fade-in mt-4">
+                <div class="card">
+                    <h3 class="text-success mb-2">✅ Провалидированные гипотезы</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">70%+ тратят >20% времени на рутину (отчетность, учет)</li>
+                        <li class="mb-2">Только 20-30% используют базовую автоматизацию (CRM/RPA)</li>
+                        <li class="mb-2">Открытость к консалтингу при быстрой отдаче (ROI < 6 мес.)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-gold mb-2">⚠️ Ограничения</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">Интерес к ИИ для прогнозирования подтвержден</li>
+                        <li class="mb-2">Ограничен зрелостью данных в компаниях</li>
+                        <li class="mb-2">Необходимость постепенного внедрения</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>«Мы не хотим экономить. Мы хотим перестать бояться и начать жить спокойно.»</p>
+                <p class="mt-2" style="font-size: 0.95rem;">Гипотеза «экономия времени/денег» не подтвердилась. Выявлен скрытый спрос на психическую стабильность собственника.</p>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3">Трансформация ценностного предложения</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>До исследований</th>
+                            <th>После валидации</th>
+                        </tr>
+                        <tr>
+                            <td>«Мы оптимизируем ваши бизнес-процессы»</td>
+                            <td>«Берем на себя головную боль по настройке бизнеса, чтобы вы спали спокойно»</td>
+                        </tr>
+                        <tr>
+                            <td>Фокус на сокращении издержек</td>
+                            <td>Фокус на возврате контроля и снижении операционной тревожности</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segmentation Section -->
+    <section id="segmentation" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Сегментация</span>
+                <h2 class="section-title">Фокус на средний бизнес</h2>
+                <p class="section-desc">Целевой сегмент «Гарант» (50–250 чел.) обладает достаточной зрелостью для COOaaS</p>
+            </div>
+            
+            <div class="grid grid-2 fade-in">
+                <div class="card">
+                    <h3 class="text-muted mb-2">Малый бизнес</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">⚠️ Бюджет на автоматизацию ограничен</li>
+                        <li class="mb-2">⚠️ Запрос на мгновенную окупаемость</li>
+                        <li class="mb-2">⚠️ Зависимость от 1-2 ключевых сотрудников</li>
+                        <li class="mb-2">⚠️ Низкий LTV, высокая текучка</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-color: var(--accent);">
+                    <h3 class="text-accent mb-2">Средний бизнес «Гарант» ✓</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">✅ Бюджет может быть выделен, ориентация на среднесрочный эффект</li>
+                        <li class="mb-2">✅ Умеренная цифровая зрелость, базовая ИТ-инфраструктура</li>
+                        <li class="mb-2">✅ Есть выделенные функции, коллегиальное принятие решений</li>
+                        <li class="mb-2">✅ Высокий LTV, потенциал долгосрочного партнёрства</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>Вывод: Средний бизнес рассматривает консалтинг как долгосрочное партнёрство, что обосновывает смещение фокуса на сегмент 50–250 чел.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section -->
+    <section id="strategy">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Стратегическое позиционирование</span>
+                <h2 class="section-title">Гибридная модель</h2>
+                <p class="section-desc">Отраслевая глубина + Локальный кластер СФО (Омск/Тюмень/ХМАО)</p>
+            </div>
+            
+            <div class="grid grid-3 fade-in">
+                <div class="strategy-card">
+                    <span class="badge badge-neutral">Вариант А</span>
+                    <h3>Отраслевой фокус без привязки к региону</h3>
+                    <p class="mt-2">✅ Высокая маржа, эффект масштаба, мгновенное сарафанное радио в узких нишах</p>
+                    <p class="mt-2">❌ Высокий порог входа при найме, длинный цикл сделки, логистические издержки, системный отраслевой риск</p>
+                </div>
+                <div class="strategy-card">
+                    <span class="badge badge-neutral">Вариант В</span>
+                    <h3>Работа на локальном рынке без привязки к отрасли</h3>
+                    <p class="mt-2">✅ Быстрый старт через нетворк, низкие логистические расходы, диверсификация рисков по секторам</p>
+                    <p class="mt-2">❌ Низкая маржа из-за сравнения с универсалами, каждый проект уникален (высокие OpEx), сложность премиального брендинга</p>
+                </div>
+                <div class="strategy-card active">
+                    <span class="badge badge-success">Выбрано</span>
+                    <h3>Гибридная модель</h3>
+                    <p class="mt-2">✅ Начать с отраслевого подхода, но сузить до локального кластера СФО (Омск/Тюмень/ХМАО)</p>
+                    <p class="mt-2">✅ После валидации портфолио — географическое масштабирование</p>
+                    <p class="mt-2">✅ Балансирует риски, сохраняет маржинальность, минимизирует логистику на старте</p>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>Чистые стратегии редко работают идеально. Для бутика автоматизация требует глубокого понимания процессов. Переключение между контекстами генерирует временные потери. Преимущество бутика — глубина и уникальная методология, которая стоит дорого.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ansoff Section -->
+    <section id="ansoff" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Матрица Ансоффа</span>
+                <h2 class="section-title">Вектор роста</h2>
+                <p class="section-desc">Развитие продукта (45% успеха) вместо чистого проникновения</p>
+            </div>
+            
+            <div class="grid grid-2 fade-in">
+                <div class="card">
+                    <h3>Проникновение — 65%</h3>
+                    <p class="text-muted">Рост доли рынка на текущих услугах. Ограничено линейной выручкой и низким LTV.</p>
+                </div>
+                <div class="card" style="border-color: var(--accent); background: rgba(59, 130, 246, 0.05);">
+                    <h3 class="text-accent">ВЫБРАНО: Развитие продукта — 45%</h3>
+                    <p>Переход от продажи часов к продаже методологии. Продуктизация + ИИ-рычаг.</p>
+                </div>
+                <div class="card">
+                    <h3>Развитие рынка — 30%</h3>
+                    <p class="text-muted">Географическая экспансия. Требует значительных ресурсов на адаптацию.</p>
+                </div>
+                <div class="card">
+                    <h3>Диверсификация — 15%</h3>
+                    <p class="text-muted">Новые продукты и рынки. Высокий риск при ограниченных ресурсах.</p>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>Стратегия развития продукта трансформирует бутик из провайдера услуг в создателя интеллектуальных продуктов, где ценность определяется не количеством затраченных часов, а глубиной методологической проработки, скоростью достижения операционных результатов и гарантией возврата инвестиций.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Canvas Section -->
+    <section id="canvas">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Бизнес-модель</span>
+                <h2 class="section-title">Эволюция Canvas</h2>
+                <p class="section-desc">От «Соло-эксперта» к масштабируемому COOaaS</p>
+            </div>
+            
+            <div class="grid grid-2 fade-in">
+                <div class="card">
+                    <h3 class="text-muted">Модель 1.0 (2027–2028)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><strong>Ценность:</strong> Быстрый аудит, точечная оптимизация. отраслевая экспертиза.</li>
+                        <li class="mb-2"><strong>Клиенты:</strong> Локальный средний производственный МСП</li>
+                        <li class="mb-2"><strong>Доходы:</strong> 90% проектные фиксы, 10% допродажи.</li>
+                        <li class="mb-2"><strong>Ресурсы:</strong> Основатель (время), базовый софт.</li>
+                        <li class="mb-2"><strong>Издержки:</strong> ФОТ, командировки, фрилансеры.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-color: var(--success);">
+                    <h3 class="text-success">Модель 2.0 (2028–2030)</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><strong>Ценность:</strong> Подписка «Спокойный директор», COO как сервис. Продуктизация + ИИ.</li>
+                        <li class="mb-2"><strong>Клиенты:</strong> Средние МСП (нефтегаз, производство) в СФО + ДО крупного бизнеса.</li>
+                        <li class="mb-2"><strong>Доходы:</strong> 60% Проекты, 30% Подписки, 10% Допродажи.</li>
+                        <li class="mb-2"><strong>Ресурсы:</strong> База знаний (RAG), репутация, команда консультантов и COO-экспертов, ИИ-обвязка.</li>
+                        <li class="mb-2"><strong>Издержки:</strong> ФОТ команды, инфраструктура, маркетинг.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7S Section -->
+    <section id="7s" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">McKinsey 7S</span>
+                <h2 class="section-title">Трансформация организации</h2>
+                <p class="section-desc">От плоской структуры соло-фаундера к гибридной матрице</p>
+            </div>
+            
+            <div class="card fade-in">
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Элемент 7S</th>
+                            <th>Текущее (1.0)</th>
+                            <th>Целевое (2.0)</th>
+                            <th>Ожидаемый эффект</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Strategy</strong></td>
+                            <td>Проектная выручка (90%), зависимость от личного времени</td>
+                            <td>Гибридная (60/30/10). Трансформация + рекуррент</td>
+                            <td>Устойчивый денежный поток, рост LTV</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Structure</strong></td>
+                            <td>Плоская, соло-фаундер + фрилансеры</td>
+                            <td>Гибридная матрица: Ядро + COO-пул + AI/Tech</td>
+                            <td>Снятие «бутылочного горлышка»</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Systems</strong></td>
+                            <td>Ручное управление, базовые шаблоны</td>
+                            <td>Интегрированная ИИ-платформа, SLA, 3-ступенчатый контроль</td>
+                            <td>Стандартизация, снижение ошибок</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shared Values</strong></td>
+                            <td>«СТЕРЖ» транслируется лично</td>
+                            <td>Ценности вшиты в СОПы, KPI и клиентские SLA</td>
+                            <td>Снижение зависимости от личности</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Style</strong></td>
+                            <td>«Руки на пульсе», совмещение всех ролей</td>
+                            <td>Архитектурно-коучинговый. Основатель — стратегия</td>
+                            <td>Фокус на росте, автономия команды</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Staff / Skills</strong></td>
+                            <td>1 эксперт + пул фрилансеров</td>
+                            <td>30+ сертифицированных экспертов (рычаг 1-2-3)</td>
+                            <td>Гарантированное качество, готовность к экспансии</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SWOT Section -->
+    <section id="swot">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">SWOT-анализ</span>
+                <h2 class="section-title">Фокус на SO и WO-векторах</h2>
+                <p class="section-desc">Цифровое замещение и тиражирование экспертизы</p>
+            </div>
+            
+            <div class="grid grid-2 fade-in">
+                <div class="card">
+                    <h3 class="text-accent">SO-стратегия</h3>
+                    <p><strong>«Специалист по цифровому замещению»</strong></p>
+                    <p class="text-muted mt-2">Позиционирование автоматизации не как «оптимизации», а как замены дефицитных сотрудников. Быстрый ROI (< 6 мес.).</p>
+                    <p class="mt-2"><strong>Используем:</strong> Кросс-функциональная экспертиза + Кадровый парадокс</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-success">WO-стратегия</h3>
+                    <p><strong>«Продуктизация и тиражирование»</strong></p>
+                    <p class="text-muted mt-2">Создание библиотеки готовых отраслевых шаблонов (нефтянка, производство) на базе GenAI. Преодоление ограничения времени.</p>
+                    <p class="mt-2"><strong>Используем:</strong> Импортозамещение ПО + ИИ-рычаг</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-2 fade-in mt-4">
+                <div class="card">
+                    <h3 class="text-gold">ST-стратегия (Защитная)</h3>
+                    <p><strong>«Финансовая устойчивость через подписку»</strong></p>
+                    <p class="text-muted mt-2">Увеличение доли абонентской платы для создания финансовой подушки. Работа с отечественным ПО для минимизации санкционных рисков.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-danger">WT-стратегия (Минимизация)</h3>
+                    <p><strong>«Селективность клиентов»</strong></p>
+                    <p class="text-muted mt-2">Фокус на средних предприятиях (50-250 чел.) из нефтепереработки/машиностроения. Операционная непрерывность через автоматизацию.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-4 fade-in mt-4">
+                <div class="card text-center">
+                    <div class="text-accent font-mono" style="font-size: 1.5rem; font-weight: 700;">S</div>
+                    <p class="text-muted mt-1">Экспертиза, ИИ-рычаг, локальное доверие</p>
+                </div>
+                <div class="card text-center">
+                    <div class="text-gold font-mono" style="font-size: 1.5rem; font-weight: 700;">W</div>
+                    <p class="text-muted mt-1">Зависимость от времени, репутационные риски</p>
+                </div>
+                <div class="card text-center">
+                    <div class="text-success font-mono" style="font-size: 1.5rem; font-weight: 700;">O</div>
+                    <p class="text-muted mt-1">Кадровый парадокс, импортозамещение</p>
+                </div>
+                <div class="card text-center">
+                    <div class="text-danger font-mono" style="font-size: 1.5rem; font-weight: 700;">T</div>
+                    <p class="text-muted mt-1">Охлаждение спроса, высокая ставка</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="pyramid" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Продуктовая пирамида</span>
+                <h2 class="section-title">Шестиступенчатая архитектура</h2>
+                <p class="section-desc">От быстрого аудита к рекуррентной модели</p>
+            </div>
+            
+            <div class="pyramid fade-in">
+                <div class="pyramid-level">
+                    <span class="level-tag tag-heavy">Уровни 1–2 | HEAVY</span>
+                    <h3>Стратегическая интеграция и рекуррент</h3>
+                    <div class="product-list">
+                        <span class="product-badge">COOaaS</span>
+                        <span class="product-badge">Антикризисное управление</span>
+                        <span class="product-badge">«Спокойный директор»</span>
+                    </div>
+                    <p class="text-muted mt-2">Цель: рекуррентная выручка, LTV</p>
+                    <p class="text-accent mt-1 font-mono">Абонентская модель</p>
+                </div>
+                <div class="pyramid-level">
+                    <span class="level-tag tag-core">Уровни 3–4 | CORE</span>
+                    <h3>Глубокая операционная и цифровая трансформация</h3>
+                    <div class="product-list">
+                        <span class="product-badge">Цифровая стратегия</span>
+                        <span class="product-badge">Автоматизация бизнес-функций</span>
+                        <span class="product-badge">Оптимизация отдельных процессов</span>
+                        <span class="product-badge">Трансформация процессов «под ключ»</span>
+                    </div>
+                    <p class="text-muted mt-2">Цель: увеличение среднего чека, кросс-продажи</p>
+                    <p class="text-accent mt-1 font-mono">Проектная модель</p>
+                </div>
+                <div class="pyramid-level">
+                    <span class="level-tag tag-entry">Уровни 5–6 | ENTRY</span>
+                    <h3>Входные и диагностические услуги</h3>
+                    <div class="product-list">
+                        <span class="product-badge">Базовые консультации и обучение</span>
+                        <span class="product-badge">Передача компетенций</span>
+                        <span class="product-badge">Операционный аудит и бенчмаркинг</span>
+                        <span class="product-badge">«Скорая помощь для бизнеса»</span>
+                    </div>
+                    <p class="text-muted mt-2">Цель: количество проектов, вход в воронку, быстрые победы</p>
+                    <p class="text-accent mt-1 font-mono">Входной продукт</p>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>Логика переходов: Базовая консультация (6) → Аудит (5) → Оптимизация / автоматизация отдельных процессов (4) → Трансформация (2-3) → COOaaS (1). Каждый этап снижает воспринимаемый риск следующего, увеличивая LTV без роста CAC.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funnel & CJM Section -->
+    <section id="funnel">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Воронка и CJM</span>
+                <h2 class="section-title">Предсказуемый путь клиента</h2>
+                <p class="section-desc">От фильтрации лидов к постпродажному удержанию</p>
+            </div>
+            
+            <div class="grid grid-2 fade-in">
+                <div class="card">
+                    <h3 class="mb-3">Дуальная воронка продаж</h3>
+                    <div class="text-center">
+                        <p class="text-accent font-mono">Процессный контур:</p>
+                        <p class="font-mono">Отбор (30) → Квалификация (25) → Встреча (15) → КП (8) → Сделка (6)</p>
+                    </div>
+                    <div class="text-center mt-3">
+                        <p class="text-success font-mono">Продуктовый контур:</p>
+                        <p class="font-mono">Аудит (100%) → Проект на оптимизацию (50%) → Подписка (10%)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="mb-3">CJM сегмента «Гарант»</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">1️⃣ <strong>Осознание:</strong> «Опять аврал». Барьер: «просто надо лучше работать»</li>
+                        <li class="mb-2">2️⃣ <strong>Поиск:</strong> Страх «консультантов-теоретиков»</li>
+                        <li class="mb-2">3️⃣ <strong>Анализ:</strong> Решение: пилот с ограниченным скоупом</li>
+                        <li class="mb-2">4️⃣ <strong>Внедрение:</strong> Решение: быстрые победы за 4 недели</li>
+                        <li>5️⃣ <strong>Результат:</strong> Переход в кросс-продажи и референсы</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leads Section -->
+    <section id="leads" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Стратегия лидов</span>
+                <h2 class="section-title">Value First</h2>
+                <p class="section-desc">Ценность раньше предложения для обхода холодных продаж</p>
+            </div>
+            
+            <div class="grid grid-3 fade-in">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Обратный пилот</h3>
+                    <p>2-часовая диагностика 1 метрики бесплатно / чек-лист самопроверки</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🐴</div>
+                    <h3>Троянский конь</h3>
+                    <p>Вход через острую тактическую проблему, а не первопричину</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Активация нетворка</h3>
+                    <p>Запрос контакта под видом «сбора обратной связи»</p>
+                </div>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3">Каналы и метрики успеха</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Канал</th>
+                            <th>Формат</th>
+                            <th>Ключевая фраза/Триггер</th>
+                        </tr>
+                        <tr>
+                            <td>TenChat / LinkedIn</td>
+                            <td>Экспертный пост + тег</td>
+                            <td>«Коллеги из [X], нашел закономерность...»</td>
+                        </tr>
+                        <tr>
+                            <td>Telegram-чаты</td>
+                            <td>Ответ + ссылка</td>
+                            <td>Без спама. Сначала польза, потом магнит</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>Тема + 3 строки</td>
+                            <td>«Исследование: скрытые потери в...»</td>
+                        </tr>
+                        <tr>
+                            <td>Офлайн</td>
+                            <td>Конференции</td>
+                            <td>Вопрос вместо визитки: «Как решаете...?»</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Стратегическое видение</span>
+                <h2 class="section-title">BHAG 2036</h2>
+                <p class="section-desc">Вектор десятилетней трансформации: федеральный центр компетенций</p>
+            </div>
+            
+            <div class="vision-grid fade-in">
+                <div class="vision-card">
+                    <div class="vision-icon">💰</div>
+                    <div class="vision-value">100 млн ₽</div>
+                    <div class="vision-label">Экономика</div>
+                    <p class="vision-desc">EBITDA ≥35%. Топ-5 независимых практик Сибири. Продуктизация + ИИ + подписки.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-icon">🌍</div>
+                    <div class="vision-value">3 Хаба</div>
+                    <div class="vision-label">География</div>
+                    <p class="vision-desc">Новосибирск, Красноярск, Алматы/Астана. Превращение «регион — аутсорсинг» в «регион — превосходство».</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-icon">👥</div>
+                    <div class="vision-value">30+</div>
+                    <div class="vision-label">Эксперты</div>
+                    <p class="vision-desc">Рычаг 1-2-3. «Школа роста». Модель со-владения методологией и распределённой прибыли.</p>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in mt-4">
+                <p>«Превращение стереотипа "регион — аутсорсинг" в "регион — операционное превосходство". Создание притягательной экосистемы для талантов и инвестиций.»</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Ценности</span>
+                <h2 class="section-title">Каркас «СТЕРЖ»</h2>
+                <p class="section-desc">Операционный фильтр и целеполагание на горизонте 05.2027</p>
+            </div>
+            
+            <div class="values-grid fade-in">
+                <div class="value-letter">
+                    <div class="value-char">С</div>
+                    <div class="value-word">Системная добросовестность</div>
+                    <div class="value-desc">Меняем структуру, а не «красим»</div>
+                </div>
+                <div class="value-letter">
+                    <div class="value-char">Т</div>
+                    <div class="value-word">Техническая честность</div>
+                    <div class="value-desc">Факты > Мнения</div>
+                </div>
+                <div class="value-letter">
+                    <div class="value-char">Е</div>
+                    <div class="value-word">Единство с людьми</div>
+                    <div class="value-desc">Внедрение через людей</div>
+                </div>
+                <div class="value-letter">
+                    <div class="value-char">Р</div>
+                    <div class="value-word">Рациональность</div>
+                    <div class="value-desc">Продукт важнее процесса</div>
+                </div>
+                <div class="value-letter">
+                    <div class="value-char">Ж</div>
+                    <div class="value-word">Жёсткий стандарт</div>
+                    <div class="value-desc">Слово = Контракт</div>
+                </div>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3">Категорические «НЕТ»</h3>
+                <div class="grid grid-3">
+                    <p class="text-danger">❌ Косметическим рекомендациям</p>
+                    <p class="text-danger">❌ Модным «погремушкам»</p>
+                    <p class="text-danger">❌ Внедрению сверху</p>
+                    <p class="text-danger">❌ Юридическим лазейкам</p>
+                    <p class="text-danger">❌ Искусственной зависимости</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Дорожная карта</span>
+                <h2 class="section-title">Трансформация по этапам</h2>
+                <p class="section-desc">От упаковки продуктов к региональным хабам</p>
+            </div>
+            
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2027</div>
+                        <h3>Старт & Упаковка</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>Продукты entry/core, юр. база, найм ассистента</li>
+                            <li>ИИ-микроинструменты, верификация базы ЛПР (200 контактов)</li>
+                            <li>Запуск 5 пилотов со скидкой 50-70%</li>
+                            <li>Выход из найма при стабильном потоке</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2028</div>
+                        <h3>Команда & Подписочные модели</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>Найм по рычагу 1-2-3 (партнёры-консультанты-стажеры)</li>
+                            <li>Упаковка heavy-продуктов, запуск COOaaS подписки</li>
+                            <li>Партнёрства с поставщиками ПО</li>
+                            <li>Контент-машина на автопилоте</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2029-2036</div>
+                        <h3>Масштабирование</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>2029-2030: Хабы НСК/Тюмень/Красноярск</li>
+                            <li>2032-2034: Выход на рынки СНГ (Алматы/Астана)</li>
+                            <li>2036: BHAG 100 млн ₽, 30+ экспертов, EBITDA ≥35%</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prioritization Section -->
+    <section id="prioritization" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Приоритизация</span>
+                <h2 class="section-title">Матрица инициатив</h2>
+                <p class="section-desc">Фокус на низкоресурсных мультипликаторах</p>
+            </div>
+            
+            <div class="card fade-in">
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Влияние \ Ресурсоёмкость</th>
+                            <th>Низкая (1)</th>
+                            <th>Средняя (3)</th>
+                            <th>Высокая (9)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Низкая (1)</strong></td>
+                            <td>—</td>
+                            <td>ИИ-микроинструменты (лендинги, боты, чек-листы)</td>
+                            <td>Упаковка entry/core, Юр. база, Найм ассистента</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Средняя (3)</strong></td>
+                            <td>—</td>
+                            <td>Контент-машина (кейсы, разборы, вебинары)</td>
+                            <td>Пилоты, ИИ-обвязка, База ЛПР, Партнёрства</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Высокая (9)</strong></td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Оптимизация процессов, Упаковка heavy-продуктов</td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="mt-3 text-muted">Стратегия первого года: Отказ от экстенсивной модели. Ресурсы направляются в квадранты с низкой/средней ресурсоёмкостью для создания MVP-инфраструктуры.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COOaaS Section -->
+    <section id="cooas">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">COOaaS</span>
+                <h2 class="section-title">Архитектура подписки</h2>
+                <p class="section-desc">«Защищённое ИИ-ядро + Отраслевой эксперт»</p>
+            </div>
+            
+            <div class="grid grid-3 fade-in">
+                <div class="card text-center">
+                    <h3 class="text-muted">Старт</h3>
+                    <p class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">150-200к ₽</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;" class="mt-2">
+                        <li>• 1 площадка</li>
+                        <li>• 5 ключевых дашбордов</li>
+                        <li>• 8 ч/мес COO</li>
+                        <li>• Базовые коннекторы</li>
+                    </ul>
+                </div>
+                <div class="card text-center" style="border-color: var(--accent); background: rgba(59, 130, 246, 0.05);">
+                    <h3 class="text-accent">Рост ✓</h3>
+                    <p class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">250-350к ₽</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;" class="mt-2">
+                        <li>• До 3 площадок</li>
+                        <li>• 15 KPI-дашбордов</li>
+                        <li>• 12 ч/мес COO</li>
+                        <li>• Расширенные интеграции</li>
+                        <li>• Диагностическая аналитика</li>
+                    </ul>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-gold">Профессионал</h3>
+                    <p class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">400к+ ₽</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;" class="mt-2">
+                        <li>• Группа предприятий</li>
+                        <li>• Неограниченно дашбордов</li>
+                        <li>• 20 ч/мес COO</li>
+                        <li>• Кастомные интеграции</li>
+                        <li>• Предиктивная аналитика</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3">Безопасность & Комплаенс</h3>
+                <div class="grid grid-3">
+                    <p>🔒 On-prem или приватное облако РФ</p>
+                    <p>🔐 Шифрование данных, маскирование перед LLM</p>
+                    <p>📋 Соответствие: 152-ФЗ, ФСТЭК, ГОСТ Р МЭК 62443</p>
+                </div>
+                <p class="mt-3 text-accent font-mono">COGS/клиент: 68 000 ₽ → Маржинальность: 72.8%</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Section -->
+    <section id="ai" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">ИИ-обвязка</span>
+                <h2 class="section-title">Основатель + ИИ-агенты</h2>
+                <p class="section-desc">Снижение операционной нагрузки до ≤12 ч/нед при маржинальности ≥60%</p>
+            </div>
+            
+            <div class="grid grid-4 fade-in">
+                <div class="card text-center">
+                    <div class="card-icon">📧</div>
+                    <h3>Cold Outreach</h3>
+                    <p>Квалификация лидов, скоринг, первичный контакт</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">📊</div>
+                    <h3>Аналитик & PM</h3>
+                    <p>Парсинг данных, черновики отчётов, трекинг задач</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">💳</div>
+                    <h3>Фин. агент</h3>
+                    <p>Счета, контроль оплат, генерация КП/NDA</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon">📚</div>
+                    <h3>Менеджер БЗ</h3>
+                    <p>RAG-наполнение, кейсы, методологии</p>
+                </div>
+            </div>
+            
+            <div class="card fade-in mt-4">
+                <h3 class="mb-3">3-ступенчатая валидация артефактов</h3>
+                <div class="grid grid-3">
+                    <div class="text-center">
+                        <div class="font-mono text-accent" style="font-size: 2rem; font-weight: 900;">1</div>
+                        <h4>ИИ-генерация</h4>
+                        <p class="text-muted">Выверенные промпты создают черновики</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-mono text-gold" style="font-size: 2rem; font-weight: 900;">2</div>
+                        <h4>Внутренний ИИ-контроль</h4>
+                        <p class="text-muted">Проверка логики, ссылок на НМД/ФНП</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-mono text-success" style="font-size: 2rem; font-weight: 900;">3</div>
+                        <h4>Человеко-контроль</h4>
+                        <p class="text-muted">Основатель принимает финальное решение</p>
+                    </div>
+                </div>
+                <div class="grid grid-2 mt-4">
+                    <p class="text-center"><strong>Стек:</strong> Self-hosted + Open-source + n8n/Make + Low-code</p>
+                    <p class="text-center font-mono text-accent"><strong>Бюджет:</strong> ~138 000 ₽</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financials Section -->
+    <section id="financials">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Финансы</span>
+                <h2 class="section-title">Финансовая архитектура</h2>
+                <p class="section-desc">Рентабельность 37% и EBITDA 40% к 3 году</p>
+            </div>
+            
+            <div class="card fade-in mb-4">
+                <h3 class="mb-3">Юнит-экономика (Год 1)</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Средний чек проекта</td>
+                            <td class="font-mono text-accent">500 000 ₽</td>
+                        </tr>
+                        <tr>
+                            <td>Переменные затраты (VC, 43%)</td>
+                            <td class="font-mono text-danger">215 000 ₽</td>
+                        </tr>
+                        <tr>
+                            <td>Маржинальный доход (CM)</td>
+                            <td class="font-mono text-success">285 000 ₽ (57%)</td>
+                        </tr>
+                        <tr>
+                            <td>Точка безубыточности</td>
+                            <td class="font-mono text-accent">1,7 проекта/мес</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card fade-in">
+                <h3 class="mb-3">P&L Прогноз (3 года)</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Показатель</th>
+                            <th>Год 1</th>
+                            <th>Год 2</th>
+                            <th>Год 3</th>
+                        </tr>
+                        <tr>
+                            <td>Совокупная выручка</td>
+                            <td class="font-mono">11,4 млн ₽</td>
+                            <td class="font-mono">45,3 млн ₽</td>
+                            <td class="font-mono text-accent">88,5 млн ₽</td>
+                        </tr>
+                        <tr>
+                            <td>— Проекты / Подписки</td>
+                            <td class="font-mono">11,4 / 0</td>
+                            <td class="font-mono">30 / 15,3</td>
+                            <td class="font-mono">48 / 40,5</td>
+                        </tr>
+                        <tr>
+                            <td>EBITDA</td>
+                            <td class="font-mono">2,93 млн ₽</td>
+                            <td class="font-mono">15,79 млн ₽</td>
+                            <td class="font-mono text-success">38,63 млн ₽</td>
+                        </tr>
+                        <tr>
+                            <td>Чистая прибыль</td>
+                            <td class="font-mono">2,75 млн ₽</td>
+                            <td class="font-mono">14,84 млн ₽</td>
+                            <td class="font-mono text-success">36,31 млн ₽</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="grid grid-3 mt-4">
+                    <div class="text-center">
+                        <div class="font-mono text-success" style="font-size: 2rem; font-weight: 900;">37%</div>
+                        <p class="text-muted">Чистая рентабельность (Год 3)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-mono text-success" style="font-size: 2rem; font-weight: 900;">40%</div>
+                        <p class="text-muted">EBITDA Margin (Год 3)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-mono text-accent" style="font-size: 2rem; font-weight: 900;">3,36 млн ₽</div>
+                        <p class="text-muted">LTV (Средневзвешенный)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risks Section -->
+    <section id="risks" style="background: var(--secondary);">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Риск-менеджмент</span>
+                <h2 class="section-title">Система управления рисками</h2>
+                <p class="section-desc">Фокус на ликвидности и репутации</p>
+            </div>
+            
+            <div class="card fade-in">
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Риск</th>
+                            <th>Стратегия снижения</th>
+                        </tr>
+                        <tr>
+                            <td>Р01. Малоизвестность</td>
+                            <td>Пилоты со скидкой 50-70%, нетворкинг, кейсы с измеримым ROI</td>
+                        </tr>
+                        <tr>
+                            <td>Р02. Кассовые разрывы</td>
+                            <td>Предоплата 30-50%, подписки (целевая доля 30%+), финансовая подушка</td>
+                        </tr>
+                        <tr>
+                            <td>Р03. Неудачный проект</td>
+                            <td>Жесткие KPI, доп. соглашения, статус-встречи 1 раз/2 недели</td>
+                        </tr>
+                        <tr>
+                            <td>Р04. Выгорание основателя</td>
+                            <td>Лимит 3-4 активных проекта, делегирование ИИ-агентам, страхование</td>
+                        </tr>
+                        <tr>
+                            <td>Р05. Задержка оплаты</td>
+                            <td>Поэтапные транши (30/40/30), проверка через Контур.Фокус, штрафы</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="grid grid-3 mt-4">
+                    <div>
+                        <h4 class="text-accent mb-2">Триггеры реагирования</h4>
+                        <p class="text-muted">Просрочка >7 дней, падение подушки ниже лимита, отток клиентов</p>
+                    </div>
+                    <div>
+                        <h4 class="text-accent mb-2">Контрольные метрики</h4>
+                        <p class="text-muted">Конверсия лидов, доля рекуррентной выручки, CSI, загрузка (ч/нед)</p>
+                    </div>
+                    <div>
+                        <h4 class="text-accent mb-2">Цикл пересмотра</h4>
+                        <p class="text-muted">Ежеквартально + внепланово при смене макроконъюнктуры</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section id="final">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">Заключение</span>
+                <h2 class="section-title">Архитектура перехода к масштабированию</h2>
+            </div>
+            
+            <div class="grid grid-3 fade-in mb-4">
+                <div class="card">
+                    <h3 class="text-accent mb-2">Валидированные инсайты</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">✅ Запрос смещен от «экономии» к «психической стабильности»</li>
+                        <li class="mb-2">✅ Сегмент «Гарант» готов к COOaaS</li>
+                        <li class="mb-2">✅ Гибридная модель сглаживает волатильность</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-success mb-2">Финансовая устойчивость</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">Рост выручки: 11,4 млн ₽ → 88,47 млн ₽</li>
+                        <li class="mb-2">Чистая рентабельность: 37% / EBITDA: 40%</li>
+                        <li class="mb-2">Точка безубыточности: 1,7 проекта/мес</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-gold mb-2">Операционный рычаг</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2">ИИ-обвязка снижает нагрузку до ≤12 ч/нед</li>
+                        <li class="mb-2">Высвобождение 65% времени от рутины</li>
+                        <li class="mb-2">Маржинальность ≥60% сохраняется</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="insight-quote fade-in">
+                <p>Мы строим практику, где хаос превращается в систему.</p>
+            </div>
+            
+            <div class="text-center fade-in mt-4">
+                <h2 class="mb-3">Спасибо за внимание!</h2>
+                <p class="text-muted">Готов ответить на Ваши вопросы</p>
+                <div class="author-info mt-4">
+                    <p><strong>Владислав Васильев</strong> | МВА «Трансформация» | 2026</p>
+                    <p>TG vasilev_vd | +7 (952) 398-89-79</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">СТЕРЖ</div>
+            <p class="footer-text">© 2026 Консалтинговый бутик «СТЕРЖ». МВА «Трансформация».</p>
+            <p class="footer-text">Создано для защиты итоговой аттестационной работы</p>
+            
+            <a href="#top" class="footer-btn">
+                <span>↑</span> Наверх
+            </a>
+            
+            <p class="copyright">Переход от хаоса к архитектуре процессов</p>
+        </div>
+    </footer>
+
+    <!-- Print Button -->
+    <button class="print-btn" onclick="window.print()" title="Версия для печати">🖨</button>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Active navigation link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Navigation scroll
+        function scrollNav(direction) {
+            const nav = document.getElementById('navLinks');
+            const scrollAmount = 200;
+            nav.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Chart.js Visualization for Competitors
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('strategyCanvas').getContext('2d');
+            
+            // Data from CSV
+            const labels = ['Стоимость', 'Скорость внедрения', 'Экспертиза в процессах', 'Тех. гибкость', 'Поддержка после', 'Прозрачность условий', 'Гарантия ROI'];
+            
+            const boutiqueData = [2, 3, 3, 3, 1, 3, 1];
+            
+            const datasets = [
+                {
+                    label: 'БУТИК 1.0',
+                    data: boutiqueData,
+                    borderColor: '#3b82f6', // Accent
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#3b82f6',
+                    pointRadius: 5,
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: 'Kaizen Consult',
+                    data: [2, 2, 3, 1, 2, 2, 2],
+                    borderColor: 'rgba(148, 163, 184, 0.5)',
+                    borderWidth: 1,
+                    pointRadius: 2,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [5, 5]
+                },
+                {
+                    label: 'ДИДЖИТОРИКА',
+                    data: [2, 3, 2, 3, 2, 2, 2],
+                    borderColor: 'rgba(148, 163, 184, 0.5)',
+                    borderWidth: 1,
+                    pointRadius: 2,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [5, 5]
+                },
+                {
+                    label: 'КонсалтингПРО / ПСК',
+                    data: [2, 2, 2, 1, 2, 1, 1],
+                    borderColor: 'rgba(148, 163, 184, 0.5)',
+                    borderWidth: 1,
+                    pointRadius: 2,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [5, 5]
+                },
+                {
+                    label: 'OSMINOG Project',
+                    data: [2, 3, 2, 3, 3, 2, 2],
+                    borderColor: 'rgba(148, 163, 184, 0.5)',
+                    borderWidth: 1,
+                    pointRadius: 2,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [5, 5]
+                },
+                {
+                    label: 'MOST-Consulting',
+                    data: [2, 2, 3, 3, 2, 3, 2],
+                    borderColor: 'rgba(148, 163, 184, 0.5)',
+                    borderWidth: 1,
+                    pointRadius: 2,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [5, 5]
+                },
+                {
+                    label: 'ОТРАСЛЕВОЙ СТАНДАРТ',
+                    data: [2, 2, 2, 3, 2, 2, 2],
+                    borderColor: 'rgba(148, 163, 184, 0.5)',
+                    borderWidth: 1,
+                    pointRadius: 2,
+                    fill: false,
+                    tension: 0.3,
+                    borderDash: [5, 5]
+                }
+            ];
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#94a3b8',
+                                font: { family: 'Inter' },
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                boxWidth: 10,
+                                padding: 20
+                            },
+                            onClick: (e, legendItem, legend) => {
+                                const index = legendItem.datasetIndex;
+                                const ci = legend.chart;
+                                if (ci.isDatasetVisible(index)) {
+                                    ci.hide(index);
+                                    legendItem.hidden = true;
+                                } else {
+                                    ci.show(index);
+                                    legendItem.hidden = false;
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                            titleColor: '#f8fafc',
+                            bodyColor: '#94a3b8',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: true
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#94a3b8',
+                                font: { size: 11, family: 'Inter' },
+                                maxRotation: 45,
+                                minRotation: 45
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: 3.5,
+                            ticks: {
+                                color: '#94a3b8',
+                                stepSize: 1,
+                                font: { size: 12, family: 'Inter' }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
