@@ -1198,7 +1198,7 @@
             </div>
             
             <div class="insight-quote fade-in mt-4">
-                <p>Важно держать в фокусе и переосмыслять у конкурентов те базовые услуги, которые они предлагают клиентам.</p>
+                <p>Важно держать в фокусе и переосмыслять у конкурентов те услуги, которые они предлагают клиентам.</p>
             </div>
 
             <!-- START: Competitor Matrix Table -->
@@ -1531,7 +1531,7 @@
                     </ul>
                 </div>
                 <div class="card" style="border-color: var(--accent);">
-                    <h3 class="text-accent mb-2">Средний бизнес «Гарант» ✓</h3>
+                    <h3 class="text-accent mb-2">Средний бизнес «Гарант»</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li class="mb-2">✅ Бюджет может быть выделен, ориентация на среднесрочный эффект</li>
                         <li class="mb-2">✅ Умеренная цифровая зрелость, базовая ИТ-инфраструктура</li>
@@ -1599,7 +1599,7 @@
                     <p class="text-muted">Рост доли рынка на текущих услугах. Ограничено линейной выручкой и низким LTV.</p>
                 </div>
                 <div class="card" style="border-color: var(--accent); background: rgba(59, 130, 246, 0.05);">
-                    <h3 class="text-accent">ВЫБРАНО: Развитие продукта — 45%</h3>
+                    <h3 class="text-accent">Развитие продукта — 45%</h3>
                     <p>Переход от продажи часов к продаже методологии. Продуктизация + ИИ-рычаг.</p>
                 </div>
                 <div class="card">
@@ -1824,39 +1824,212 @@
     </section>
 
     <!-- Funnel & CJM Section -->
-    <section id="funnel">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-tag">Воронка и CJM</span>
-                <h2 class="section-title">Предсказуемый путь клиента</h2>
-                <p class="section-desc">От фильтрации лидов к постпродажному удержанию</p>
+    <section id="funnel" style="padding: 80px 0; background: linear-gradient(180deg, #0a0e1a 0%, #0f1525 100%);">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span style="display: inline-block; background: rgba(96,165,250,0.12); color: #60a5fa; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid rgba(96,165,250,0.25); margin-bottom: 16px;">Воронка и CJM</span>
+                <h2 style="font-size: 32px; font-weight: 800; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; letter-spacing: -0.5px;">Прогнозируемый путь клиента</h2>
+                <p style="color: #64748b; font-size: 16px; margin: 0;">От фильтрации лидов к постпродажному удержанию</p>
             </div>
-            
-            <div class="grid grid-2 fade-in">
-                <div class="card">
-                    <h3 class="mb-3">Дуальная воронка продаж</h3>
-                    <div class="text-center">
-                        <p class="text-accent font-mono">Процессный контур:</p>
-                        <p class="font-mono">Отбор (30) → Квалификация (25) → Встреча (15) → КП (8) → Сделка (6)</p>
-                    </div>
-                    <div class="text-center mt-3">
-                        <p class="text-success font-mono">Продуктовый контур:</p>
-                        <p class="font-mono">Аудит (100%) → Проект на оптимизацию (50%) → Подписка (10%)</p>
+
+            <!-- Funnel Charts Row -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 60px;">
+                
+                <!-- Process Funnel -->
+                <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(148,163,184,0.1); border-radius: 20px; padding: 32px;">
+                    <h3 style="font-size: 18px; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; text-align: center;">Процессный контур</h3>
+                    <p style="text-align: center; color: #64748b; font-size: 13px; margin-bottom: 28px;">Отбор → Квалификация → Встреча → КП → Сделка</p>
+                    
+                    <svg viewBox="0 0 400 320" style="width: 100%; max-width: 400px; display: block; margin: 0 auto;">
+                        <defs>
+                            <linearGradient id="procGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.9"/>
+                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.6"/>
+                            </linearGradient>
+                            <linearGradient id="procGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7"/>
+                                <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.5"/>
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Level 1: Отбор (30) -->
+                        <polygon points="40,10 360,10 330,65 70,65" fill="url(#procGrad)" stroke="#60a5fa" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="200" y="42" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, sans-serif">Отбор</text>
+                        <text x="200" y="58" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-family="Inter, sans-serif">30 контактов</text>
+                        
+                        <!-- Level 2: Квалификация (25) -->
+                        <polygon points="75,75 325,75 300,130 100,130" fill="url(#procGrad)" stroke="#60a5fa" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="200" y="107" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, sans-serif">Квалификация</text>
+                        <text x="200" y="123" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-family="Inter, sans-serif">25 контактов</text>
+                        
+                        <!-- Level 3: Встреча (15) -->
+                        <polygon points="105,140 295,140 275,195 125,195" fill="url(#procGrad2)" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="200" y="172" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, sans-serif">Встреча</text>
+                        <text x="200" y="188" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-family="Inter, sans-serif">15 встреч</text>
+                        
+                        <!-- Level 4: КП (8) -->
+                        <polygon points="130,205 270,205 255,260 145,260" fill="url(#procGrad2)" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="200" y="237" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, sans-serif">КП</text>
+                        <text x="200" y="253" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-family="Inter, sans-serif">8 предложений</text>
+                        
+                        <!-- Level 5: Сделка (6) -->
+                        <polygon points="150,270 250,270 240,310 160,310" fill="#2563eb" stroke="#3b82f6" stroke-width="2" stroke-opacity="0.8" filter="url(#glow)"/>
+                        <text x="200" y="296" text-anchor="middle" fill="white" font-size="15" font-weight="700" font-family="Inter, sans-serif">Сделка</text>
+                        <text x="200" y="308" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-family="Inter, sans-serif">6 закрытых</text>
+                    </svg>
+                    
+                    <!-- Conversion rate -->
+                    <div style="display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+                        <span style="background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); border-radius: 8px; padding: 6px 12px; font-size: 12px; color: #60a5fa; font-weight: 600;">Конверсия: 20%</span>
+                        <span style="background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); border-radius: 8px; padding: 6px 12px; font-size: 12px; color: #60a5fa; font-weight: 600;">Отсев: 80%</span>
                     </div>
                 </div>
-                <div class="card">
-                    <h3 class="mb-3">CJM сегмента «Гарант»</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li class="mb-2">1️⃣ <strong>Осознание:</strong> «Опять аврал». Барьер: «просто надо лучше работать»</li>
-                        <li class="mb-2">2️⃣ <strong>Поиск:</strong> Страх «консультантов-теоретиков»</li>
-                        <li class="mb-2">3️⃣ <strong>Анализ:</strong> Решение: пилот с ограниченным скоупом</li>
-                        <li class="mb-2">4️⃣ <strong>Внедрение:</strong> Решение: быстрые победы за 4 недели</li>
-                        <li>5️⃣ <strong>Результат:</strong> Переход в кросс-продажи и референсы</li>
-                    </ul>
+
+                <!-- Product Funnel -->
+                <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(148,163,184,0.1); border-radius: 20px; padding: 32px;">
+                    <h3 style="font-size: 18px; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; text-align: center;">Продуктовый контур</h3>
+                    <p style="text-align: center; color: #64748b; font-size: 13px; margin-bottom: 28px;">Аудит → Оптимизация → Подписка</p>
+                    
+                    <svg viewBox="0 0 400 320" style="width: 100%; max-width: 400px; display: block; margin: 0 auto;">
+                        <defs>
+                            <linearGradient id="prodGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.9"/>
+                                <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.6"/>
+                            </linearGradient>
+                            <linearGradient id="prodGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.7"/>
+                                <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0.5"/>
+                            </linearGradient>
+                            <linearGradient id="prodGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#16a34a;stop-opacity:0.8"/>
+                                <stop offset="100%" style="stop-color:#15803d;stop-opacity:0.6"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Level 1: Аудит (100%) -->
+                        <polygon points="20,10 380,10 340,80 60,80" fill="url(#prodGrad1)" stroke="#4ade80" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="200" y="45" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, sans-serif">Аудит</text>
+                        <text x="200" y="65" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-weight="800" font-family="Inter, sans-serif">100%</text>
+                        
+                        <!-- Arrow -->
+                        <line x1="200" y1="85" x2="200" y2="100" stroke="#4ade80" stroke-width="2" stroke-opacity="0.4" marker-end="url(#arrowGreen)"/>
+                        
+                        <!-- Level 2: Проект (50%) -->
+                        <polygon points="70,105 330,105 295,175 105,175" fill="url(#prodGrad2)" stroke="#22c55e" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="200" y="140" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="Inter, sans-serif">Проект на оптимизацию</text>
+                        <text x="200" y="162" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-weight="800" font-family="Inter, sans-serif">50%</text>
+                        
+                        <!-- Arrow -->
+                        <line x1="200" y1="180" x2="200" y2="195" stroke="#22c55e" stroke-width="2" stroke-opacity="0.4"/>
+                        
+                        <!-- Level 3: Подписка (10%) -->
+                        <polygon points="120,200 280,200 260,270 140,270" fill="url(#prodGrad3)" stroke="#16a34a" stroke-width="2" stroke-opacity="0.6"/>
+                        <text x="200" y="235" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, sans-serif">Подписка</text>
+                        <text x="200" y="257" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="20" font-weight="800" font-family="Inter, sans-serif">10%</text>
+                        
+                        <!-- Glow effect on last element -->
+                        <circle cx="200" cy="240" r="60" fill="none" stroke="#4ade80" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="4 4">
+                            <animate attributeName="r" values="55;65;55" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="stroke-opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
+                    
+                    <!-- Conversion metrics -->
+                    <div style="display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+                        <span style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 6px 12px; font-size: 12px; color: #4ade80; font-weight: 600;">Аудит → Проект: 50%</span>
+                        <span style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 6px 12px; font-size: 12px; color: #4ade80; font-weight: 600;">Проект → Подписка: 20%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CJM Timeline -->
+            <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(148,163,184,0.1); border-radius: 20px; padding: 36px 32px;">
+                <h3 style="font-size: 18px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px; text-align: center;">CJM сегмента «Гарант»</h3>
+                <p style="text-align: center; color: #64748b; font-size: 13px; margin-bottom: 36px;">Производственный бизнес B2B · 50–250 чел.</p>
+                
+                <!-- Timeline -->
+                <div style="position: relative; padding: 0 16px;">
+                    <!-- Connecting line -->
+                    <div style="position: absolute; top: 28px; left: 40px; right: 40px; height: 3px; background: linear-gradient(90deg, #f59e0b, #4ade80, #60a5fa, #a78bfa, #fb923c); border-radius: 2px; opacity: 0.3;"></div>
+                    
+                    <!-- Steps -->
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; position: relative;">
+                        
+                        <!-- Step 1 -->
+                        <div style="text-align: center; position: relative;">
+                            <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.1)); border: 2px solid rgba(245,158,11,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; position: relative; z-index: 2;">🔥</div>
+                            <div style="font-size: 14px; font-weight: 700; color: #f59e0b; margin-bottom: 6px;">1. Осознание</div>
+                            <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">Фиксирует проблемы,<br>пытается контролировать все лично</div>
+                            <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #f87171; line-height: 1.4;">
+                                <strong>⚠ Барьер:</strong> Уверенность, что «просто надо лучше работать»
+                            </div>
+                            <div style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #4ade80; line-height: 1.4;">
+                                <strong>✅ Решение:</strong> Бесплатный экспресс-аудит «узких мест». Показать расчет потерь от хаоса
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div style="text-align: center; position: relative;">
+                            <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(74,222,128,0.1)); border: 2px solid rgba(74,222,128,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; position: relative; z-index: 2;">🔍</div>
+                            <div style="font-size: 14px; font-weight: 700; color: #4ade80; margin-bottom: 6px;">2. Поиск</div>
+                            <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">Ищет решение в интернете,<br>спрашивает у коллег</div>
+                            <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #f87171; line-height: 1.4;">
+                                <strong>⚠ Барьер:</strong> Страх, что консультанты - теоретики
+                            </div>
+                            <div style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #4ade80; line-height: 1.4;">
+                                <strong>✅ Решение:</strong> Публикация кейсов из ниши клиента. Вебинары с разбором реальных проблем
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div style="text-align: center; position: relative;">
+                            <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, rgba(96,165,250,0.2), rgba(96,165,250,0.1)); border: 2px solid rgba(96,165,250,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; position: relative; z-index: 2;">📋</div>
+                            <div style="font-size: 14px; font-weight: 700; color: #60a5fa; margin-bottom: 6px;">3. Анализ</div>
+                            <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">Запрашивает КП у 3-5 компаний,<br>проверяет референсы</div>
+                            <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #f87171; line-height: 1.4;">
+                                <strong>⚠ Барьер:</strong> Сложность оценки компетенций
+                            </div>
+                            <div style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #4ade80; line-height: 1.4;">
+                                <strong>✅ Решение:</strong> Пилот с ограниченным скоупом
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4 -->
+                        <div style="text-align: center; position: relative;">
+                            <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, rgba(167,139,250,0.2), rgba(167,139,250,0.1)); border: 2px solid rgba(167,139,250,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; position: relative; z-index: 2;">⚡</div>
+                            <div style="font-size: 14px; font-weight: 700; color: #a78bfa; margin-bottom: 6px;">4. Внедрение</div>
+                            <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">Выделяет проектную команду,<br>участвует на старте,<br>контролирует прогресс</div>
+                            <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #f87171; line-height: 1.4;">
+                                <strong>⚠ Барьер:</strong> Временное падение продуктивности, техсбои, саботаж сотрудников
+                            </div>
+                            <div style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #4ade80; line-height: 1.4;">
+                                <strong>✅ Решение:</strong> Быстрые победы, обучение персонала
+                            </div>
+                        </div>
+                        
+                        <!-- Step 5 -->
+                        <div style="text-align: center; position: relative;">
+                            <div style="width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(249,115,22,0.1)); border: 2px solid rgba(249,115,22,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; position: relative; z-index: 2;">🏆</div>
+                            <div style="font-size: 14px; font-weight: 700; color: #fb923c; margin-bottom: 6px;">5. Результат</div>
+                            <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">Анализирует метрики<br>планирует дальнейшее развитие</div>
+                            <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #f87171; line-height: 1.4;">
+                                <strong>⚠ Барьер:</strong> Желание внедрить допфункции
+                            </div>
+                            <div style="background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: #4ade80; line-height: 1.4;">
+                                <strong>✅ Решение:</strong> Фиксация бэклога, статус-встречи, предложение планов дальнейшего сотрудничества
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- Leads Section -->
     <section id="leads" style="background: var(--secondary);">
@@ -2006,6 +2179,7 @@
         </div>
     </section>
 
+    
     <!-- Roadmap Section -->
     <section id="roadmap">
         <div class="container">
@@ -2123,8 +2297,8 @@
                         <li>• Базовые коннекторы</li>
                     </ul>
                 </div>
-                <div class="card text-center" style="border-color: var(--accent); background: rgba(59, 130, 246, 0.05);">
-                    <h3 class="text-accent">Рост ✓</h3>
+                <div class="card text-center">
+                    <h3 class="text-accent">Рост</h3>
                     <p class="font-mono text-accent" style="font-size: 1.5rem; font-weight: 700;">250-350к ₽</p>
                     <ul style="list-style: none; padding: 0; text-align: left;" class="mt-2">
                         <li>• До 3 площадок</li>
@@ -2328,15 +2502,15 @@
                         </tr>
                         <tr>
                             <td>Р01. Малоизвестность</td>
-                            <td>Пилоты со скидкой 50-70%, нетворкинг, кейсы с измеримым ROI</td>
+                            <td>Пилоты со скидкой 50-70%, нетворкинг, контент-маркетинг, личный бренд</td>
                         </tr>
                         <tr>
                             <td>Р02. Кассовые разрывы</td>
-                            <td>Предоплата 30-50%, подписки (целевая доля 30%+), финансовая подушка</td>
+                            <td>Предоплата 30-50%, совмещение с наймом на первом этапе, финансовая подушка, абонентская модель</td>
                         </tr>
                         <tr>
                             <td>Р03. Неудачный проект</td>
-                            <td>Жесткие KPI, доп. соглашения, статус-встречи 1 раз/2 недели</td>
+                            <td>Жесткие границы проекта, доп. соглашения, сбор ОС, статус-встречи</td>
                         </tr>
                         <tr>
                             <td>Р04. Выгорание основателя</td>
@@ -2380,7 +2554,7 @@
                     <h3 class="text-accent mb-2">Валидированные инсайты</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li class="mb-2">✅ Запрос смещен от «экономии» к «психической стабильности»</li>
-                        <li class="mb-2">✅ Сегмент «Гарант» готов к COOaaS</li>
+                        <li class="mb-2">✅ Сегмент «Гарант» потенциально готов к COOaaS</li>
                         <li class="mb-2">✅ Гибридная модель сглаживает волатильность</li>
                     </ul>
                 </div>
@@ -2395,9 +2569,8 @@
                 <div class="card">
                     <h3 class="text-gold mb-2">Операционный рычаг</h3>
                     <ul style="list-style: none; padding: 0;">
-                        <li class="mb-2">ИИ-обвязка снижает нагрузку до ≤12 ч/нед</li>
-                        <li class="mb-2">Высвобождение 65% времени от рутины</li>
-                        <li class="mb-2">Маржинальность ≥60% сохраняется</li>
+                        <li class="mb-2">ИИ-обвязка снижает нагрузку на рутинные операции</li>
+                        <li class="mb-2">Фиксация и использование лучших практик из БЗ с самого начала</li>
                     </ul>
                 </div>
             </div>
