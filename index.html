@@ -19,8 +19,8 @@
             --gold-light: #fbbf24;
             --success: #10b981;
             --danger: #ef4444;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
+            --text: #ffffff;
+            --text-muted: #d9dee4;
             --text-dim: #64748b;
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -254,7 +254,7 @@
         
         .author-info p {
             margin: 0.25rem 0;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
         
@@ -966,6 +966,15 @@
             color: var(--text);
             font-size: 0.95rem;
         }
+         /* === УВЕЛИЧЕНИЕ ТЕКСТА НА ~18% (БЕЗ ЗАГОЛОВКОВ) === */
+        p, li, td, th, label, input, textarea,
+        .card p, .card li, h3, h4,
+        .insight-quote p, .metric-label, .metric-sub,
+        .timeline-year,
+        .vision-label, .vision-desc, .value-word, .value-desc {
+        font-size: 1.15em !important;
+        }
+        /* ==================================================== */
     </style>
 </head>
 <body>
@@ -1013,7 +1022,8 @@
       
             <div class="author-info">
                 <p><strong>Автор:</strong> Васильев Владислав Дмитриевич</p>
-                <p><strong>Руководитель:</strong> Шуваев Ярослав Александрович | <strong>Директор программы:</strong> Пуртов Андрей Станиславович</p>
+                <p><strong>Руководитель:</strong> Шуваев Ярослав Александрович</p>
+                <p><strong>Директор программы:</strong> Пуртов Андрей Станиславович</p>
                 <p>Президентская академия • 2026</p>
             </div>
         </div>
@@ -1296,7 +1306,7 @@
                                     <th class="cm-col-header cm-green">Автоматизация<br>процессов</th>
                                     <th class="cm-col-header cm-yellow">Разработка</th>
                                     <th class="cm-col-header cm-yellow">Интеграция<br>(1С, CRM, ERP)</th>
-                                    <th class="cm-col-header cm-yellow">Аудит<br>процессов</th>
+                                    <th class="cm-col-header cm-green">Аудит<br>процессов</th>
                                     <th class="cm-col-header cm-cyan">Цифровая<br>трансформация</th>
                                     <th class="cm-col-header cm-cyan">ИИ<br>решения</th>
                                     <th class="cm-col-header cm-cyan">Обучение</th>
